@@ -1,11 +1,26 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const db = require('./db');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
-app.listen(port, () => {
-  console.log(`Example app listening on PORT ${port}`)
+
+
+// app.get('/', function (req, res) {
+//   res.send('How may I help You?')
+// })
+// app.get('/idli', function (req, res) {
+//     res.send('Idli will be server.')
+// })
+// app.get('/chicken',(req,res)=>{
+//     res.send("Chicken will be Served");
+// })
+
+const personRoutes = require('./routes/personRoute');
+app.use('/person',personRoutes);
+
+
+app.listen(3000,()=>{
+    console.log("Server is running at PORT.")
 })
